@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <style>
+        h1 {
+            text-align: center;
+            padding: 50px 20px 50px 20px;
+            font-size: 60px;
+
+        }
+
+        h2 {
+            color: black;
+            text-align: center;
+            padding: 10px 20px 10px 20px;
+        }
+
+        img {
+            width: 855px;
+            border-radius: 4px;
+            padding: 10px 0px 20px 0px;
+        }
+
+        .monday,
+        .tuesday,
+        .wednesday,
+        .thursday {
+            padding: 0px 0px 43px 0px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <h1 id="city">
+
+        </h1>
+
+
+        <h2 id="temp">
+
+        </h2>
+
+
+
+        <div class="row">
+            <div class="col-4">
+                <h2>
+                    <div class="monday">
+
+                        <div class="row">
+
+                            <div class="col">
+                                ☔
+                            </div>
+
+                            <div class="col">
+                                M
+                            </div>
+                            <div class="col">
+                                55° F
+                            </div>
+
+                        </div>
+                    </div>
+                    <br>
+                    <div class="tuesday">
+
+                        <div class="row">
+                            <div class="col">
+                                🌧
+                            </div>
+                            <div class="col">
+                                T
+                            </div>
+                            <div class="col">
+                                46° F
+                            </div>
+
+                        </div>
+                    </div>
+                    <br>
+                    <div class="wednesday">
+
+                        <div class="row">
+                            <div class="col">
+                                ⛅
+                            </div>
+                            <div class="col">
+                                W
+                            </div>
+                            <div class="col">
+                                69° F
+                            </div>
+
+                        </div>
+                    </div>
+                    <br>
+                    <div class="thursday">
+
+                        <div class="row">
+                            <div class="col">
+                                ☔
+                            </div>
+                            <div class="col">
+                                T
+                            </div>
+                            <div class="col">
+                                53° F
+                            </div>
+
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row" class="friday">
+                        <div class="col">
+                            🌤
+                        </div>
+                        <div class="col">
+                            F
+                        </div>
+                        <div class="col">
+                            56° F
+                        </div>
+
+                    </div>
+
+
+                </h2>
+            </div>
+
+
+            <div class="col-8">
+                <form id="search-form">
+                    <div class="mb-3">
+                        <input type="text" class="form-control" id="search-text" aria-describedby="emailHelp"
+                            placeholder="Search Location">
+                    </div>
+                </form>
+                <br>
+
+                <img src="https://www.portland.gov/sites/default/files/styles/banner_2_1_640w/public/2021/cannabis-map.jpg?itok=uIHzthiR"
+                    alt="">
+
+            </div>
+
+        </div>
+
+
+
+
+
+
+
+    </div>
+
+    <script>
+
+        // Feature 1
+        //let dateh2 = document.querySelector("#date");
+
+        //let now = new Date();
+
+        //let date = now.getDate();
+        //let year = now.getFullYear();
+        //let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+        //let day = days[now.getDay()]; // 0 and 6
+        //let hours = now.getHours();
+        //if (hours<10) {
+        // hours = `0${hours}`;
+        //}
+        //let minutes = now.getMinutes();
+        //if (minutes < 0) {
+        //minutes = `0${minutes}`;
+        //}
+
+        //dateh2.innerHTML = `${day}, ${temperature}`;
+        //dateh2.innerHTML = `${day}, ${hours}:${minutes}`;
+
+        // Feature 2
+
+        function showTemperature(response) {
+            // Once I get the HTTP response, we display the city name and temperature
+            //console.log(response.data.main.temp);
+            document.querySelector("#city").innerHTML = response.data.name;
+
+
+            let temperature = Math.round(response.data.main.temp);
+
+            let h2 = document.querySelector("h2");
+            h2.innerHTML = `${temperature}°C`;
+
+            //document.querySelector("#humidity").innerHTML = response.data.main.humidity; make sure to tag id as humidity
+        }
+
+        function search(city) {
+            // Make an API Call to OpenWeather API
+            let apiKey = "bad7d22d20acf170eb966f0d0727a2fc";
+            let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+
+            axios.get(apiUrl).then(showTemperature);
+
+        }
+
+        function handleSubmit(event) {
+            event.preventDefault();
+            //let cityElement = document.querySelector("#city");
+            //cityElement.innerHTML = document.querySelector("#search-text").value;
+
+
+            let city = document.querySelector("#search-text").value;
+            search(city);
+
+        }
+
+
+
+
+        let searchForm = document.querySelector("#search-form");
+        searchForm.addEventListener("submit", handleSubmit);
+
+
+
+
+        search("Portland");
+
+
+
+
+
+    </script>
+
+</body>
+
+</html>
