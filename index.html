@@ -40,6 +40,25 @@
             display: block;
             text-align: center;
         }
+        .weather-temperature strong {
+            font-size: 64px;
+            font-weight: 400;
+            line-height: 1;
+
+        }
+
+        .weather-temperature .units {
+            position: relative;
+            font-size: 16px;
+            top: -32px;
+
+        }
+        .weather-temperature {
+            text-align: center;
+            padding: 20px;
+        }
+        
+
     </style>
 </head>
 
@@ -50,11 +69,17 @@
 
         </h1>
 
+        <div class="clearfix weather-temperature" >
+            
+            <h2 id="temp">
+            
+            </h2>
+            
+            <strong> 12 </strong>
 
-        <h2 id="temp">
-
-        </h2>
-        °C | °F
+            <span class="units">°C | <a href="#">°F</a> </span>
+        </div>
+        
         
 
 
@@ -172,14 +197,14 @@
     <div class="link-note">
         <small>
             
-            <a href="https://vigorous-poincare-b75418.netlify.app/" target="_blank"> Open-Source Code </a> 
-            by Liz Rowe
+            <a href="https://vigorous-poincare-b75418.netlify.app/" target="_blank"> Open-Source Code</a> 
+             by Liz Rowe
         </small>
     </div>
         
     <script>
 
-        // Feature 1 margin: 10px 0px 10px 850px;
+        // Feature 1
         //let dateh2 = document.querySelector("#date");
 
         //let now = new Date();
