@@ -57,6 +57,12 @@
             text-align: center;
             padding: 20px;
         }
+        li {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            text-transform: capitalize;
+        }
         
 
     </style>
@@ -68,16 +74,33 @@
         <h1 id="city">
 
         </h1>
+        <div class="row">
 
-        <div class="clearfix weather-temperature" >
-            
-            <h2 id="temp">
-            
-            </h2>
-            
-            <strong> 12 </strong>
+            <div class="col-6">
+                <div class="clearfix weather-temperature" >
+                    
+                    <strong id="temperature"> 12 </strong>
+        
+                    <span class="units">°C | <a href="#">°F</a> </span>
+                </div>
+                
+            </div>
 
-            <span class="units">°C | <a href="#">°F</a> </span>
+            <div class="col-6">
+                <ul>
+                    <li id="description">
+                        Weather Description: 
+                    </li>
+                    <li>
+                        Wind Speed: <span id="wind"></span> Km/H
+                    </li>
+                    <li>
+                        Humidity: <span id="humidity"> </span> %
+                    </li>
+                </ul>
+            </div>
+            
+
         </div>
         
         
@@ -235,8 +258,18 @@
 
             let temperature = Math.round(response.data.main.temp);
 
-            let h2 = document.querySelector("h2");
-            h2.innerHTML = `${temperature}`;
+            let temperatureElement = document.querySelector("#temperature");
+            temperatureElement.innerHTML = `${temperature}`;
+
+            let descriptionElement = document.querySelector("#description");
+            descriptionElement.innerHTML = response.data.weather[0].description;
+
+            let humidityElement = document.querySelector("#humidity");
+            humidityElement.innerHTML = response.data.main.humidity;
+
+            let windspeedElement = document.querySelector("#wind");
+            windspeedElement.innerHTML = Math.round(response.data.wind.speed);
+
 
             //document.querySelector("#humidity").innerHTML = response.data.main.humidity; make sure to tag id as humidity
         }
