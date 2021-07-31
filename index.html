@@ -65,6 +65,8 @@
         }
         
 
+        
+
     </style>
 </head>
 
@@ -78,7 +80,10 @@
 
             <div class="col-6">
                 <div class="clearfix weather-temperature" >
-                    
+                    <img src="" 
+                    alt="Clear"
+                    id = "icon"
+                    >
                     <strong id="temperature"> 12 </strong>
         
                     <span class="units">°C | <a href="#">°F</a> </span>
@@ -269,6 +274,12 @@
 
             let windspeedElement = document.querySelector("#wind");
             windspeedElement.innerHTML = Math.round(response.data.wind.speed);
+
+            let iconElement = document.querySelector("#icon");
+            iconElement.setAttribute(
+                "src",
+                `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+            );
 
 
             //document.querySelector("#humidity").innerHTML = response.data.main.humidity; make sure to tag id as humidity
