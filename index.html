@@ -70,6 +70,19 @@
             height: 64px;
             width: 64px;
         }
+
+        .weather-temperature .active {
+            color: black;
+            cursor: default;
+        }
+
+        .weather-temperature .active:hover {
+            text-decoration: none;
+        }
+
+        a {
+            text-decoration: none;
+        }
         
 
         
@@ -93,7 +106,10 @@
                     >
                     <strong id="temperature"> 12 </strong>
         
-                    <span class="units">°C | <a href="#">°F</a> </span>
+                    <span class="units">
+                        <a href="#" id="celsius-link" class="active">°C</a> |
+                        <a href="#" id="fahrenheit-link">°F</a> 
+                    </span>
                 </div>
                 
             </div>
@@ -288,8 +304,8 @@
                 `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
             );
 
-
-            //document.querySelector("#humidity").innerHTML = response.data.main.humidity; make sure to tag id as humidity
+            celsiusTemperature = response.data.main.temp;
+            
         }
 
         function search(city) {
@@ -321,12 +337,39 @@
 
 
 
-        search("Portland");
-
         
+        function displayFahrenheitTemperature(event) {
+            event.preventDefault();
+            let fahrenheitTemperature = (celsiusTemperature * 9) / 5 + 32;
+            let temperatureElement = document.querySelector("#temperature");
+            temperatureElement.innerHTML = Math.round(fahrenheitTemperature);
 
+            // remove the active class the celsiusLink and add to fahrenheitLink
+            celsiusLink.classList.remove("active");
 
+            fahrenheitLink.classList.add("active");
+        }
 
+        function displayCelsiusTemperature(event) {
+            event.preventDefault();
+            let temperatureElement = document.querySelector("#temperature");
+            temperatureElement.innerHTML = Math.round(celsiusTemperature);
+            // remove the active class the FahrenheitLink and add to celsiusLink
+            celsiusLink.classList.add("active");
+
+            fahrenheitLink.classList.remove("active");
+        }
+        
+        let celsiusTemperature = null;
+        
+        
+        let fahrenheitLink = document.querySelector("#fahrenheit-link");
+        fahrenheitLink.addEventListener("click", displayFahrenheitTemperature);
+
+        let celsiusLink = document.querySelector("#celsius-link");
+        celsiusLink.addEventListener("click", displayCelsiusTemperature);
+
+        search("Portland");
     </script>
 
 </body>
