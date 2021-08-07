@@ -156,97 +156,31 @@
         
         <div class="row">
             <div class="col-4">
-                <div class= "weather-forecast">
-                    <div class="monday">
+                <div class= "weather-forecast" id="forecast">
+                    <div class="row">
                         
-                        <div class="row">
-                            
-                            <div class="col">
-                                <img src="http://openweathermap.org/img/wn/50d@2x.png" alt="" width="60">
-                            </div>
-                            
-                            <div class="col">
-                                <div class="weather-forecast-date">
-                                    M
-                                </div>
-                                 
-                            </div>
-                            <div class="col">
-                                <div class="weather-forecast-temperatures">
-                                    <span class="weather-forecast-temperature-max">
-                                        55°
-                                    </span>
-                                    <span class="weather-forecast-temperature-min">
-                                        12°
-                                    </span>
-                                </div>
-                            </div>
-                            
-                        </div>
-                    </div>
-                    <br>
-                    <div class="tuesday">
-                        
-                        <div class="row">
-                            <div class="col">
-                                <img src="http://openweathermap.org/img/wn/50d@2x.png" alt="" width="60">
-                            </div>
-                            <div class="col">
-                                T
-                            </div>
-                            <div class="col">
-                                46° F 12° C
-                            </div>
-                            
-                        </div>
-                    </div>
-                    <br>
-                    <div class="wednesday">
-                        
-                        <div class="row">
-                            <div class="col">
-                                <img src="http://openweathermap.org/img/wn/50d@2x.png" alt="" width="60">
-                            </div>
-                            <div class="col">
-                                W
-                            </div>
-                            <div class="col">
-                                69° F 12° C
-                            </div>
-                            
-                        </div>
-                    </div>
-                    <br>
-                    <div class="thursday">
-                        
-                        <div class="row">
-                            <div class="col">
-                                <img src="http://openweathermap.org/img/wn/50d@2x.png" alt="" width="60">
-                            </div>
-                            <div class="col">
-                                T
-                            </div>
-                            <div class="col">
-                                53° F 12° C
-                            </div>
-                            
-                        </div>
-                    </div>
-                    <br>
-                    <div class="row" class="friday">
                         <div class="col">
                             <img src="http://openweathermap.org/img/wn/50d@2x.png" alt="" width="60">
                         </div>
+                        
                         <div class="col">
-                            F
+                            <div class="weather-forecast-date">
+                                M
+                            </div>
+                                
                         </div>
                         <div class="col">
-                            56° F 12° C
+                            <div class="weather-forecast-temperatures">
+                                <span class="weather-forecast-temperature-max">
+                                    55°
+                                </span>
+                                <span class="weather-forecast-temperature-min">
+                                    12°
+                                </span>
+                            </div>
                         </div>
                         
                     </div>
-                    
-                    
                 </div>
             </div>
             
@@ -306,6 +240,53 @@
         //dateh2.innerHTML = `${day}, ${hours}:${minutes}`;
 
         // Feature 2
+
+        function displayForecast() {
+            let forecastElement = document.querySelector("#forecast");
+
+            let forecastHTML = ``;
+            let days = ["S", "M", "T", "W", "T", "F", "S"];
+            days.forEach(function(day) {
+                
+                forecastHTML = forecastHTML + 
+                    `
+                        <div class="row">
+                            <div class="col">
+                                <img src="http://openweathermap.org/img/wn/50d@2x.png" alt="" width="60">
+                            </div>
+        
+                            <div class="col">
+                                <div class="weather-forecast-date">
+                                    ${day}
+                                </div>
+        
+                            </div>
+                            <div class="col">
+                                <div class="weather-forecast-temperatures">
+                                    <span class="weather-forecast-temperature-max">
+                                        55°
+                                    </span>
+                                    <span class="weather-forecast-temperature-min">
+                                        12°
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        
+    
+                    `;
+
+            })
+            
+
+
+            forecastHTML = forecastHTML + ``;
+            forecastElement.innerHTML = forecastHTML;
+            
+            
+            
+        }
 
         function showTemperature(response) {
             // Once I get the HTTP response, we display the city name and temperature
@@ -390,6 +371,8 @@
         }
         
         let celsiusTemperature = null;
+
+        displayForecast();
         
         
         let fahrenheitLink = document.querySelector("#fahrenheit-link");
