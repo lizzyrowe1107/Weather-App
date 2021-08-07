@@ -82,6 +82,7 @@
 
         a {
             text-decoration: none;
+            padding-bottom: 50px;
         }
 
         .weather-forecast {
@@ -104,7 +105,6 @@
 
         }
 
-        
 
     </style>
 </head>
@@ -126,8 +126,7 @@
                     <strong id="temperature"> 12 </strong>
         
                     <span class="units">
-                        <a href="#" id="celsius-link" class="active">°C</a> |
-                        <a href="#" id="fahrenheit-link">°F</a> 
+                        °F
                     </span>
                 </div>
                 
@@ -311,7 +310,7 @@
         function getForecast (coordinates) {
 
             let apiKey = "bad7d22d20acf170eb966f0d0727a2fc";
-            let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+            let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=imperial`;
             axios.get(apiUrl).then(displayForecast);
 
         }
@@ -352,7 +351,7 @@
         function search(city) {
             // Make an API Call to OpenWeather API
             let apiKey = "bad7d22d20acf170eb966f0d0727a2fc";
-            let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+            let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=imperial`;
 
             axios.get(apiUrl).then(showTemperature);
 
@@ -376,40 +375,6 @@
         searchForm.addEventListener("submit", handleSubmit);
 
 
-
-
-        
-        function displayFahrenheitTemperature(event) {
-            event.preventDefault();
-            let fahrenheitTemperature = (celsiusTemperature * 9) / 5 + 32;
-            let temperatureElement = document.querySelector("#temperature");
-            temperatureElement.innerHTML = Math.round(fahrenheitTemperature);
-
-            // remove the active class the celsiusLink and add to fahrenheitLink
-            celsiusLink.classList.remove("active");
-
-            fahrenheitLink.classList.add("active");
-        }
-
-        function displayCelsiusTemperature(event) {
-            event.preventDefault();
-            let temperatureElement = document.querySelector("#temperature");
-            temperatureElement.innerHTML = Math.round(celsiusTemperature);
-            // remove the active class the FahrenheitLink and add to celsiusLink
-            celsiusLink.classList.add("active");
-
-            fahrenheitLink.classList.remove("active");
-        }
-        
-        let celsiusTemperature = null;
-
-        
-        
-        let fahrenheitLink = document.querySelector("#fahrenheit-link");
-        fahrenheitLink.addEventListener("click", displayFahrenheitTemperature);
-
-        let celsiusLink = document.querySelector("#celsius-link");
-        celsiusLink.addEventListener("click", displayCelsiusTemperature);
 
         search("Portland");
 
